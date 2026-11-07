@@ -69,7 +69,7 @@ This resource watches every player's bucket, sends a report to Discord (and the 
 - **Expected buckets.** Buckets players are meant to spend time in are never reported as stuck.
 - **Discord-friendly.** Reports are sent one at a time within Discord's limits, waiting when Discord asks it to. A role can be pinged for stuck players.
 - **Standalone.** No framework needed. Character details are added automatically with Qbox, QBCore or ESX.
-- **Translatable.** Every message is in `locales/`.
+- **23 languages.** Every message is in `locales/`, and it follows ox_lib's language setting.
 
 ## What gets reported
 
@@ -159,7 +159,7 @@ All settings are in `configuration/config.lua`, each explained by a comment next
 
 | Setting | Default | What it does |
 |---|---|---|
-| `Config.Locale` | `'en'` | Language file from `locales/` |
+| `Config.Locale` | `'auto'` | Language: `'auto'` follows ox_lib's language, or a code from `locales/` such as `'de'` |
 | `Config.DefaultBucket` | `0` | The bucket players should normally be in |
 | `Config.ExpectedBuckets` | `{}` | Buckets players are meant to spend time in; never reported as stuck |
 | `Config.ScanSeconds` | `10` | How often every player's bucket is checked |
@@ -243,7 +243,17 @@ Reasons are cut to 200 characters. If `pigeon-bucket-monitor` might not be runni
 
 ## Localisation
 
-Set `Config.Locale` to a file in `locales/`. To add a language, copy `locales/en.lua` to a new file named with the language's two-letter code (such as `de.lua`), change `Locales.en` at the top to match (`Locales.de`), and translate the text in quotes. Keep anything in `{curly brackets}` exactly as it is. We'd love it if you shared it back; see [Contributing](#contributing).
+Pigeon Bucket Monitor comes in 23 languages: `en` English, `cs` Czech, `da` Danish, `de` German, `es` Spanish, `et` Estonian, `fi` Finnish, `fr` French, `hr` Croatian, `hu` Hungarian, `id` Indonesian, `it` Italian, `nl` Dutch, `no` Norwegian, `pl` Polish, `pt` Portuguese, `pt-br` Brazilian Portuguese, `ro` Romanian, `sl` Slovenian, `sv` Swedish, `tr` Turkish, `zh-cn` Simplified Chinese and `zh-tw` Traditional Chinese. They're the languages ox_lib ships, so your server may already have one set.
+
+With `Config.Locale = 'auto'` (the default), it uses ox_lib's language, so one line in `server.cfg` sets it for this and every other resource that follows ox_lib:
+
+```cfg
+setr ox:locale "de"
+```
+
+Use `setr`, not `set`, so players' games get it too. Without it, or for a language that isn't in `locales/`, the text is English. To choose a language for this resource only, set `Config.Locale` to its code, such as `'fr'` or `'pt-br'`.
+
+Every file was checked for missing text and placeholders, but not every translation has been read by a native speaker yet. If something reads wrong, please send a fix; see [Contributing](#contributing). To add a language, copy `locales/en.lua` to a new file named with the language's code (such as `ja.lua`), change `Locales.en` at the top to match (`Locales.ja`), and translate the text in quotes. Keep anything in `{curly brackets}` exactly as it is.
 
 ## How it works
 

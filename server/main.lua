@@ -14,7 +14,9 @@ local VERSION = GetResourceMetadata(RESOURCE, 'version', 0) or '?'
 local MAX_BUCKET = 2147483647
 local SPAWN_COOLDOWN_MS = 10000
 
-local strings = Locales[Config.Locale] or Locales.en
+-- 'auto' follows ox_lib's language (the ox:locale convar), and English when that isn't set.
+local locale = Config.Locale == 'auto' and GetConvar('ox:locale', 'en') or Config.Locale
+local strings = Locales[locale] or Locales.en
 local expected = {}
 local sessions = {}       -- [source] = { bucket, since, cause, changeCause, lastStuck, expectChange, lastSpawn }
 
