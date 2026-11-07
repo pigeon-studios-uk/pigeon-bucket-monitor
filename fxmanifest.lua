@@ -5,7 +5,7 @@ lua54 'yes'
 name 'pigeon-bucket-monitor'
 author 'Pigeon Studios'
 description 'Logs routing bucket changes to Discord, warns when players are stuck in the wrong bucket, and gives staff commands to check and fix them.'
-version '1.0.0'
+version '1.1.0'
 repository 'https://github.com/pigeon-studios-uk/pigeon-bucket-monitor'
 
 -- Pigeon Studios version registry entry, read by server/version_check.lua.
